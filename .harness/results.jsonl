@@ -1,0 +1,2 @@
+{"ts":1780811641,"layer":"V0","exit_code":0,"duration_ms":0,"suite":"build+validate-ship","asserted":true}
+{"ts":1780812311,"layer":"L1","exit_code":0,"duration_ms":699,"suite":"vitest 13 specs / 83 assertions","asserted":true}

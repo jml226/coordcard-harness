@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>CoordCard</title>
+<style>
+  :root { color-scheme: dark }
+  body { font: 13px/1.45 -apple-system, system-ui, "Segoe UI", sans-serif; width: 340px; margin: 0; padding: 16px; background: #0b0e14; color: #e6ebf5 }
+  .brand { display: flex; align-items: center; gap: 8px; margin: 0 0 4px }
+  .dot { width: 12px; height: 12px; border-radius: 50%; background: #ff3b3b; box-shadow: 0 0 0 3px rgba(255,59,59,.18) }
+  h1 { font-size: 15px; margin: 0; font-weight: 700; letter-spacing: .2px }
+  .tag { font-size: 11px; color: #94a0b8; margin: 0 0 12px }
+  button { width: 100%; padding: 10px; border: 0; border-radius: 9px; background: #5e8bff; color: #fff; font-weight: 700; font-size: 13px; cursor: pointer }
+  button:hover { background: #4a78f0 }
+  #out { margin-top: 12px; font-size: 12px; color: #94a0b8 }
+  .hit { color: #ffb4b4; font-weight: 700; margin-bottom: 8px }
+  .empty { color: #8fd6a0; font-weight: 600 }
+  .card { background: #14101a; border-left: 4px solid #ff3b3b; border-radius: 7px; padding: 9px 11px; margin: 8px 0 }
+  .lbl { color: #ffd7d7; font-weight: 700; font-size: 12px }
+  .ev { color: #c7cede; margin-top: 4px; font-size: 11.5px }
+  .meta { margin-top: 10px; color: #6c7891; font-size: 11px; border-top: 1px solid #1c2333; padding-top: 8px }
+  .honest { margin-top: 10px; font-size: 10.5px; color: #6c7891 }
+</style>
+</head>
+<body>
+  <div class="brand"><span class="dot"></span><h1>CoordCard</h1></div>
+  <p class="tag">Detect coordinated YouTube comment clusters — with evidence.</p>
+  <button id="scan">Scan comments</button>
+  <div id="out">Open a YouTube video and click Scan.</div>
+  <div class="honest">Only clusters are scored. Label: "Matches coordinated-posting patterns in this video." Never labels an individual.</div>
+  <script type="module" src="./popup.ts"></script>
+</body>
+</html>

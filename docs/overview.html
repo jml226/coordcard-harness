@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CoordCard — Project & Harness Overview</title>
+<style>
+  :root { color-scheme: dark }
+  * { box-sizing: border-box }
+  body { margin: 0; background: #080a10; color: #dde3f0; font: 15px/1.6 -apple-system, system-ui, "Segoe UI", sans-serif }
+  .wrap { max-width: 920px; margin: 0 auto; padding: 40px 24px 80px }
+  h1 { font-size: 28px; margin: 0 0 4px; letter-spacing: .3px }
+  .sub { color: #8b97b3; margin: 0 0 28px }
+  .dot { display: inline-block; width: 14px; height: 14px; border-radius: 50%; background: #ff3b3b; box-shadow: 0 0 0 4px rgba(255,59,59,.18); vertical-align: middle; margin-right: 8px }
+  section { background: #0e1119; border: 1px solid #1b2233; border-radius: 14px; padding: 24px 26px; margin: 0 0 22px }
+  h2 { font-size: 19px; margin: 0 0 14px; color: #aab7da }
+  h3 { font-size: 14px; margin: 18px 0 6px; color: #7f8db0; text-transform: uppercase; letter-spacing: .8px }
+  p { margin: 8px 0 }
+  code, .mono { font-family: "SF Mono", ui-monospace, Menlo, monospace; font-size: 13px; background: #141a28; padding: 1px 6px; border-radius: 5px; color: #cdd7f0 }
+  ul { margin: 8px 0; padding-left: 20px } li { margin: 4px 0 }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin: 14px 0 }
+  .stat { background: #121726; border: 1px solid #1f2740; border-radius: 10px; padding: 14px 16px }
+  .stat b { display: block; font-size: 22px; color: #6ee7a8 } .stat span { color: #8b97b3; font-size: 12px }
+  .pill { display: inline-block; background: #1a2336; color: #9fb0d8; border-radius: 999px; padding: 3px 11px; font-size: 12px; margin: 3px 4px 3px 0 }
+  .formula { background: #0a0d15; border-left: 3px solid #5e8bff; padding: 10px 14px; border-radius: 8px; color: #cdd7f0; font-family: "SF Mono", ui-monospace, monospace; font-size: 13.5px }
+  .honest { border-left: 3px solid #ff3b3b; background: #1a0e11; padding: 12px 16px; border-radius: 8px; color: #ffd7d7 }
+  table { border-collapse: collapse; width: 100%; margin: 10px 0; font-size: 13.5px }
+  th, td { text-align: left; padding: 7px 10px; border-bottom: 1px solid #1b2233 } th { color: #8b97b3 }
+  .ok { color: #6ee7a8 } .muted { color: #6c7891 }
+  .flow { font-family: "SF Mono", ui-monospace, monospace; font-size: 13px; color: #9fb0d8 }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1><span class="dot"></span>CoordCard</h1>
+  <p class="sub">Coordinated-comment cluster detector for YouTube · MV3 Chrome extension · built by a 90-minute autonomous harness.</p>
+
+  <section>
+    <h2>① The Project</h2>
+    <h3>What</h3>
+    <p>A Chrome MV3 extension. One toolbar click scans the visible comment section of the current
+       video, detects <b>coordinated near-duplicate clusters</b>, and red-cards each flagged cluster
+       inline with concrete evidence. A single comment outside a detected cluster is never scored.</p>
+
+    <h3>Why (cited facts)</h3>
+    <ul>
+      <li>Google TAG (Q1 2026) terminated <b>2,254 + 2,602 + 1,096</b> PRC-linked YouTube channels in one quarter; of that network <b>80% had 0 subscribers</b> and comment loops ran among their own accounts.</li>
+      <li>Korea academic study (2024): 239 suspected coordinated accounts; one article drew <b>2,698 comments</b>; one account posted <b>130 comments/day</b>.</li>
+    </ul>
+
+    <h3>Algorithm v2 (cluster + signals + suppressor + score)</h3>
+    <p>Normalize (NFKC, lowercase, strip URLs/emoji/punctuation) → <b>character 4-gram Jaccard</b>;
+       a pair is near-dup at <span class="mono">sim ≥ 0.70</span>; union-find builds clusters
+       (short &lt;5-token comments skipped, singletons excluded).</p>
+    <div class="grid">
+      <div class="stat"><b>T</b><span>text-duplicate: min(1, size/5)</span></div>
+      <div class="stat"><b>B</b><span>coarse-time burst (same-bucket authors)</span></div>
+      <div class="stat"><b>R</b><span>reply-ring from parentId tree</span></div>
+      <div class="stat"><b>A</b><span>account-age (API mode only)</span></div>
+    </div>
+    <p class="formula">no-API: S = 0.50·T + 0.30·B + 0.20·R &nbsp;|&nbsp; API: S = 0.40·T + 0.25·B + 0.20·A + 0.15·R</p>
+    <h3>4-part flag guard (all must hold)</h3>
+    <p><span class="pill">S ≥ 0.70</span><span class="pill">≥ 3 distinct authors</span><span class="pill">≥ 2 positive signals</span><span class="pill">suppressor OFF</span></p>
+    <p>The deterministic <b>organic-burst suppressor</b> re-labels and never-flags fan chants
+       (93-token lexicon), RIP/condolence storms, laughter floods, and ≥30%-emoji clusters.</p>
+
+    <h3>Honesty (binding)</h3>
+    <p class="honest">The only label is "Matches coordinated-posting patterns in this video." Clusters are scored, never individuals. A forbidden-terms list is enforced over src + the built bundle.</p>
+
+    <h3>Non-goals</h3>
+    <p class="muted">No IP tracking · no cross-video history · no auto-submitted reports · no accusatory labels · no scoring of isolated comments · no ML model · no third-party data egress · storage only in chrome.storage.local · never posts on the user's behalf.</p>
+  </section>
+
+  <section>
+    <h2>② The Harness — how a 90-minute hands-off build ran</h2>
+    <p>The product was built with no human keystroke mid-run. State lived on disk so the loop
+       survived context compaction; a binary shell gate — not the model — decided "shipped".</p>
+
+    <h3>Build result (§10.A gate)</h3>
+    <div class="grid">
+      <div class="stat"><b>13</b><span>Vitest spec files green</span></div>
+      <div class="stat"><b>83</b><span>assertions passing</span></div>
+      <div class="stat"><b>MV3</b><span>dist/manifest.json valid</span></div>
+      <div class="stat"><b>8/8</b><span>ship-gate checks</span></div>
+    </div>
+
+    <h3>The binding oracle (§5.1 synthetic fixture, 17 comments)</h3>
+    <table>
+      <tr><th>Cluster</th><th>Members</th><th>S</th><th>Verdict</th></tr>
+      <tr><td>X</td><td>C1–C5 (identical text)</td><td>0.80</td><td class="ok">FLAGGED</td></tr>
+      <tr><td>Z</td><td>T1–T3 (reply-ring, 3 threads)</td><td>0.68</td><td class="muted">NOT flagged (sub-threshold)</td></tr>
+      <tr><td>M</td><td>M1–M5 (fan chant)</td><td>0.80</td><td class="muted">SUPPRESSED (would-flag, blocked)</td></tr>
+    </table>
+    <p class="muted">Cluster M proves the suppressor actively blocks a would-be 0.80 flag; cluster Z proves v2 does not over-flag a small reply ring.</p>
+
+    <h3>The machinery</h3>
+    <ul>
+      <li><b>Bootstrap (fail-closed):</b> seeds <span class="mono">.harness/</span>, copies the frozen PRD, forces pnpm 9, sets the 90-min clock.</li>
+      <li><b>Five walls / seven hooks:</b> SessionStart anchor · PreToolUse veto (PRD frozen, forbidden terms) · PostToolUse verifier · scope governor (T+30/60/75/85) · watchdog · PreCompact · Stop loop-engine.</li>
+      <li><b>Blackboard:</b> disk = memory — <span class="mono">state.md</span>, <span class="mono">progress.md</span>, <span class="mono">results.jsonl</span>, <span class="mono">continue.md</span>.</li>
+      <li><b>Three-layer verification ladder:</b> L1 synthetic-fixture (blocking gate) · L2 real-YouTube headless smoke (non-blocking) · Codex review.</li>
+    </ul>
+    <h3>The spine</h3>
+    <p class="flow">V0 scaffold → V2 scraper → V3 char-4gram cluster → V4 time/burst → V5 reply-ring + suppressor → V6 mode-split score + flag → V7 red-card injector</p>
+  </section>
+
+  <p class="muted" style="text-align:center">Generated during the autonomous run · see <code>coordcard-PRD.md</code> for the full binding spec.</p>
+</div>
+</body>
+</html>

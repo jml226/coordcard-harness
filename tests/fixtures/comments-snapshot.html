@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<!--
+  SYNTHETIC fixture (NOT scraped from YouTube) mirroring the real comment DOM
+  shape per coordcard-PRD.md §5.1. 17 comments: cluster X (C1-C5, flag),
+  reply-ring Z (T1-T3 under 3 different parents), suppressed chant M (M1-M5),
+  short-skip (C6/C7), singletons (C8, S1). Replies are nested in #replies.
+-->
+<html lang="en">
+<head><meta charset="UTF-8"><title>fixture</title></head>
+<body>
+<div id="comments"><div id="contents">
+
+  <!-- Cluster X: 5 distinct top-level authors, identical text. C1 also hosts reply T2. -->
+  <ytd-comment-thread-renderer data-cid="C1">
+    <a id="author-text" class="yt-simple-endpoint" href="/@user8x3k1"><span>@user8x3k1</span></a>
+    <yt-attributed-string id="content-text">이 영상 정말 최고예요 꼭 보세요 추천합니다</yt-attributed-string>
+    <a class="published-time-text" href="#">2 minutes ago</a>
+    <span id="vote-count-middle">3</span>
+    <div id="replies">
+      <ytd-comment-view-model data-cid="T2">
+        <a id="author-text" class="yt-simple-endpoint" href="/@dup_b7k2w"><span>@dup_b7k2w</span></a>
+        <yt-attributed-string id="content-text">구독 하고 가세요 정말 유익한 영상 입니다</yt-attributed-string>
+        <a class="published-time-text" href="#">30 minutes ago</a>
+        <span id="vote-count-middle">0</span>
+      </ytd-comment-view-model>
+    </div>
+  </ytd-comment-thread-renderer>
+
+  <ytd-comment-thread-renderer data-cid="C2">
+    <a id="author-text" class="yt-simple-endpoint" href="/@k9m2x7q"><span>@k9m2x7q</span></a>
+    <yt-attributed-string id="content-text">이 영상 정말 최고예요 꼭 보세요 추천합니다</yt-attributed-string>
+    <a class="published-time-text" href="#">2 minutes ago</a>
+    <span id="vote-count-middle">1</span>
+  </ytd-comment-thread-renderer>
+
+  <ytd-comment-thread-renderer data-cid="C3">
+    <a id="author-text" class="yt-simple-endpoint" href="/@zz1p4w8"><span>@zz1p4w8</span></a>
+    <yt-attributed-string id="content-text">이 영상 정말 최고예요 꼭 보세요 추천합니다</yt-attributed-string>
+    <a class="published-time-text" href="#">2 minutes ago</a>
+    <span id="vote-count-middle">0</span>
+  </ytd-comment-thread-renderer>
+
+  <ytd-comment-thread-renderer data-cid="C4">
+    <a id="author-text" class="yt-simple-endpoint" href="/@x7q2k9m1"><span>@x7q2k9m1</span></a>
+    <yt-attributed-string id="content-text">이 영상 정말 최고예요 꼭 보세요 추천합니다</yt-attributed-string>
+    <a class="published-time-text" href="#">2 minutes ago</a>
+    <span id="vote-count-middle">2</span>
+  </ytd-comment-thread-renderer>
+
+  <ytd-comment-thread-renderer data-cid="C5">
+    <a id="author-text" class="yt-simple-endpoint" href="/@q7w8e9r2"><span>@q7w8e9r2</span></a>
+    <yt-attributed-string id="content-text">이 영상 정말 최고예요 꼭 보세요 추천합니다</yt-attributed-string>
+    <a class="published-time-text" href="#">2 minutes ago</a>
+    <span id="vote-count-middle">0</span>
+  </ytd-comment-thread-renderer>
+
+  <!-- Short comments (<5 tokens) -> skipped by clusterer. -->
+  <ytd-comment-thread-renderer data-cid="C6">
+    <a id="author-text" class="yt-simple-endpoint" href="/@casualguy"><span>@casualguy</span></a>
+    <yt-attributed-string id="content-text">good video</yt-attributed-string>
+    <a class="published-time-text" href="#">5 minutes ago</a>
+    <span id="vote-count-middle">0</span>
+  </ytd-comment-thread-renderer>
+
+  <ytd-comment-thread-renderer data-cid="C7">
+    <a id="author-text" class="yt-simple-endpoint" href="/@watcher"><span>@watcher</span></a>
+    <yt-attributed-string id="content-text">good video</yt-attributed-string>
+    <a class="published-time-text" href="#">6 minutes ago</a>
+    <span id="vote-count-middle">0</span>
+  </ytd-comment-thread-renderer>
+
+  <!-- Organic singleton -> NOT flagged. C8 also hosts reply T3. -->
+  <ytd-comment-thread-renderer data-cid="C8">
+    <a id="author-text" class="yt-simple-endpoint" href="/@normaluser"><span>@normaluser</span></a>
+    <yt-attributed-string id="content-text">저는 이 의견에 동의하지 않습니다 근거가 부족해 보이네요</yt-attributed-string>
+    <a class="published-time-text" href="#">1 day ago</a>
+    <span id="vote-count-middle">12</span>
+    <div id="replies">
+      <ytd-comment-view-model data-cid="T3">
+        <a id="author-text" class="yt-simple-endpoint" href="/@dup_c1x8z"><span>@dup_c1x8z</span></a>
+        <yt-attributed-string id="content-text">구독 하고 가세요 정말 유익한 영상 입니다</yt-attributed-string>
+        <a class="published-time-text" href="#">30 minutes ago</a>
+        <span id="vote-count-middle">0</span>
+      </ytd-comment-view-model>
+    </div>
+  </ytd-comment-thread-renderer>
+
+  <!-- Seed top-level (reply-ring target). S1 hosts reply T1. -->
+  <ytd-comment-thread-renderer data-cid="S1">
+    <a id="author-text" class="yt-simple-endpoint" href="/@seedpost"><span>@seedpost</span></a>
+    <yt-attributed-string id="content-text">오늘 날씨 정말 좋네요 다들 좋은 하루 보내세요</yt-attributed-string>
+    <a class="published-time-text" href="#">1 hour ago</a>
+    <span id="vote-count-middle">5</span>
+    <div id="replies">
+      <ytd-comment-view-model data-cid="T1">
+        <a id="author-text" class="yt-simple-endpoint" href="/@dup_a4f9q"><span>@dup_a4f9q</span></a>
+        <yt-attributed-string id="content-text">구독 하고 가세요 정말 유익한 영상 입니다</yt-attributed-string>
+        <a class="published-time-text" href="#">30 minutes ago</a>
+        <span id="vote-count-middle">0</span>
+      </ytd-comment-view-model>
+    </div>
+  </ytd-comment-thread-renderer>
+
+  <!-- Cluster M: 5 distinct authors, identical chant text -> SUPPRESSED (would-flag). -->
+  <ytd-comment-thread-renderer data-cid="M1">
+    <a id="author-text" class="yt-simple-endpoint" href="/@bts_fan_kr"><span>@bts_fan_kr</span></a>
+    <yt-attributed-string id="content-text">오빠 정국 사랑해 영원히 응원할게 보라해 아미</yt-attributed-string>
+    <a class="published-time-text" href="#">4 minutes ago</a>
+    <span id="vote-count-middle">8</span>
+  </ytd-comment-thread-renderer>
+
+  <ytd-comment-thread-renderer data-cid="M2">
+    <a id="author-text" class="yt-simple-endpoint" href="/@army4ever"><span>@army4ever</span></a>
+    <yt-attributed-string id="content-text">오빠 정국 사랑해 영원히 응원할게 보라해 아미</yt-attributed-string>
+    <a class="published-time-text" href="#">4 minutes ago</a>
+    <span id="vote-count-middle">6</span>
+  </ytd-comment-thread-renderer>
+
+  <ytd-comment-thread-renderer data-cid="M3">
+    <a id="author-text" class="yt-simple-endpoint" href="/@purplelove7"><span>@purplelove7</span></a>
+    <yt-attributed-string id="content-text">오빠 정국 사랑해 영원히 응원할게 보라해 아미</yt-attributed-string>
+    <a class="published-time-text" href="#">4 minutes ago</a>
+    <span id="vote-count-middle">4</span>
+  </ytd-comment-thread-renderer>
+
+  <ytd-comment-thread-renderer data-cid="M4">
+    <a id="author-text" class="yt-simple-endpoint" href="/@jk_world"><span>@jk_world</span></a>
+    <yt-attributed-string id="content-text">오빠 정국 사랑해 영원히 응원할게 보라해 아미</yt-attributed-string>
+    <a class="published-time-text" href="#">4 minutes ago</a>
+    <span id="vote-count-middle">3</span>
+  </ytd-comment-thread-renderer>
+
+  <ytd-comment-thread-renderer data-cid="M5">
+    <a id="author-text" class="yt-simple-endpoint" href="/@borahae_kr"><span>@borahae_kr</span></a>
+    <yt-attributed-string id="content-text">오빠 정국 사랑해 영원히 응원할게 보라해 아미</yt-attributed-string>
+    <a class="published-time-text" href="#">4 minutes ago</a>
+    <span id="vote-count-middle">7</span>
+  </ytd-comment-thread-renderer>
+
+</div></div>
+</body></html>

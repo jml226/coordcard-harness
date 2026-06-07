@@ -1,0 +1,20 @@
+{
+  "name": "coordcard",
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "test": "vitest run",
+    "package": "cd dist && zip -r ../coordcard-0.1.0.zip . && cd ..",
+    "validate:ship": "node scripts/validate-ship.mjs"
+  },
+  "devDependencies": {
+    "@crxjs/vite-plugin": "2.4.0",
+    "@types/chrome": "0.0.313",
+    "jsdom": "25",
+    "typescript": "5.7.2",
+    "vite": "6.2.0",
+    "vitest": "4.1.0"
+  }
+}
