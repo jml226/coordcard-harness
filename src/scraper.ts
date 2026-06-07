@@ -41,21 +41,27 @@ function readFields(node: Element, unitSel: string): Pick<Comment, 'channelId' |
   return { channelId, text, relTime }
 }
 
+/** A scraped comment paired with the DOM node it came from (for badge injection). */
+export interface CommentEntry {
+  comment: Comment
+  node: Element
+}
+
 /** Primary path: comments identified by the stable data-cid attribute (fixture contract). */
-function scrapeByCid(nodes: Element[]): Comment[] {
-  const out: Comment[] = []
+function entriesByCid(nodes: Element[]): CommentEntry[] {
+  const out: CommentEntry[] = []
   for (const node of nodes) {
     const id = node.getAttribute('data-cid') ?? ''
     if (!id) continue
     const ancestor = node.parentElement?.closest('[data-cid]') ?? null
     const parentId = ancestor ? ancestor.getAttribute('data-cid') : null
-    out.push({ id, ...readFields(node, '[data-cid]'), parentId })
+    out.push({ comment: { id, ...readFields(node, '[data-cid]'), parentId }, node })
   }
   return out
 }
 
 /** Live-DOM fallback: each ytd-comment-view-model is one comment. */
-function scrapeLive(root: Root): Comment[] {
+function entriesLive(root: Root): CommentEntry[] {
   const units = Array.from(root.querySelectorAll('ytd-comment-view-model'))
   return units.map((node, i) => {
     // A view-model inside a replies renderer is a reply; its parent is the
@@ -68,13 +74,22 @@ function scrapeLive(root: Root): Comment[] {
       const topIdx = topVm ? units.indexOf(topVm) : -1
       parentId = topIdx >= 0 && topVm !== node ? `live-${topIdx}` : null
     }
-    return { id: `live-${i}`, ...readFields(node, 'ytd-comment-view-model'), parentId }
+    return { comment: { id: `live-${i}`, ...readFields(node, 'ytd-comment-view-model'), parentId }, node }
   })
 }
 
-/** Scrape all comments from a DOM root into Comment[] (data-cid primary, live fallback). */
-export function scrapeComments(root: Root): Comment[] {
+/**
+ * Scrape comments AND keep each one's source node (data-cid primary, live
+ * fallback). The injector uses these node refs so badges render under the SAME
+ * id scheme the scraper assigned — on both the fixture and live YouTube.
+ */
+export function scrapeEntries(root: Root): CommentEntry[] {
   const cidNodes = Array.from(root.querySelectorAll('[data-cid]'))
-  if (cidNodes.length > 0) return scrapeByCid(cidNodes)
-  return scrapeLive(root)
+  if (cidNodes.length > 0) return entriesByCid(cidNodes)
+  return entriesLive(root)
+}
+
+/** Scrape all comments from a DOM root into Comment[]. */
+export function scrapeComments(root: Root): Comment[] {
+  return scrapeEntries(root).map((e) => e.comment)
 }

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>CoordCard — live demo (real injector)</title>
+<style>
+  :root { color-scheme: dark }
+  body { margin: 0; background: #0f0f0f; color: #f1f1f1; font: 14px/1.5 Roboto, system-ui, sans-serif; padding: 22px 26px }
+  h2 { font-size: 16px; margin: 0 0 2px }
+  .sub { color: #aaa; font-size: 12px; margin: 0 0 18px }
+  ytd-comment-thread-renderer, ytd-comment-view-model { display: block }
+  .row { display: flex; gap: 12px; padding: 12px 0; border-bottom: 1px solid #272727 }
+  .av { width: 36px; height: 36px; border-radius: 50%; background: linear-gradient(135deg,#5e8bff,#8a5cff); flex: 0 0 36px }
+  .body { flex: 1 }
+  #author-text { color: #fff; font-weight: 600; font-size: 13px; text-decoration: none }
+  #published-time-text { color: #aaa; font-size: 12px; margin-left: 8px }
+  #content-text { display: block; margin-top: 3px; color: #f1f1f1 }
+  #vote-count-middle { color: #aaa; font-size: 12px }
+  /* The badge CSS the extension injects at runtime (here so the REAL injected badge shows). */
+  .coordcard-badge { display:block; margin:8px 0 2px; padding:7px 11px; border-left:4px solid #ff3b3b;
+    background:#2a0f12; color:#ffd7d7; font:600 12.5px/1.4 system-ui,sans-serif; border-radius:7px }
+</style>
+</head>
+<body>
+  <h2>CoordCard — demo (badges injected by the real pipeline)</h2>
+  <p class="sub">runScan(document) → scrape → cluster → score → injectBadges. Cluster X is red-carded; the BTS chant is suppressed (organic); the lone dissent stays clean.</p>
+  <div id="comments"><div id="contents">
+
+    <!-- Cluster X: 5 identical-text distinct authors -> FLAGGED S=0.80 -->
+    <ytd-comment-thread-renderer data-cid="C1"><div class="row"><div class="av"></div><div class="body">
+      <a id="author-text" href="/@user8x3k1">@user8x3k1</a><span id="published-time-text">2 minutes ago</span>
+      <yt-attributed-string id="content-text">이 영상 정말 최고예요 꼭 보세요 추천합니다</yt-attributed-string>
+      <span id="vote-count-middle">3</span></div></div></ytd-comment-thread-renderer>
+    <ytd-comment-thread-renderer data-cid="C2"><div class="row"><div class="av"></div><div class="body">
+      <a id="author-text" href="/@k9m2x7q">@k9m2x7q</a><span id="published-time-text">2 minutes ago</span>
+      <yt-attributed-string id="content-text">이 영상 정말 최고예요 꼭 보세요 추천합니다</yt-attributed-string>
+      <span id="vote-count-middle">1</span></div></div></ytd-comment-thread-renderer>
+    <ytd-comment-thread-renderer data-cid="C3"><div class="row"><div class="av"></div><div class="body">
+      <a id="author-text" href="/@zz1p4w8">@zz1p4w8</a><span id="published-time-text">2 minutes ago</span>
+      <yt-attributed-string id="content-text">이 영상 정말 최고예요 꼭 보세요 추천합니다</yt-attributed-string>
+      <span id="vote-count-middle">0</span></div></div></ytd-comment-thread-renderer>
+    <ytd-comment-thread-renderer data-cid="C4"><div class="row"><div class="av"></div><div class="body">
+      <a id="author-text" href="/@x7q2k9m1">@x7q2k9m1</a><span id="published-time-text">2 minutes ago</span>
+      <yt-attributed-string id="content-text">이 영상 정말 최고예요 꼭 보세요 추천합니다</yt-attributed-string>
+      <span id="vote-count-middle">2</span></div></div></ytd-comment-thread-renderer>
+    <ytd-comment-thread-renderer data-cid="C5"><div class="row"><div class="av"></div><div class="body">
+      <a id="author-text" href="/@q7w8e9r2">@q7w8e9r2</a><span id="published-time-text">2 minutes ago</span>
+      <yt-attributed-string id="content-text">이 영상 정말 최고예요 꼭 보세요 추천합니다</yt-attributed-string>
+      <span id="vote-count-middle">0</span></div></div></ytd-comment-thread-renderer>
+
+    <!-- Organic singleton: a dissenting comment -> NEVER scored -->
+    <ytd-comment-thread-renderer data-cid="C8"><div class="row"><div class="av"></div><div class="body">
+      <a id="author-text" href="/@normaluser">@normaluser</a><span id="published-time-text">1 day ago</span>
+      <yt-attributed-string id="content-text">저는 이 의견에 동의하지 않습니다 근거가 부족해 보이네요</yt-attributed-string>
+      <span id="vote-count-middle">12</span></div></div></ytd-comment-thread-renderer>
+
+    <!-- Fan chant: WOULD score 0.80 but SUPPRESSED as organic -->
+    <ytd-comment-thread-renderer data-cid="M1"><div class="row"><div class="av"></div><div class="body">
+      <a id="author-text" href="/@bts_fan_kr">@bts_fan_kr</a><span id="published-time-text">4 minutes ago</span>
+      <yt-attributed-string id="content-text">오빠 정국 사랑해 영원히 응원할게 보라해 아미</yt-attributed-string>
+      <span id="vote-count-middle">8</span></div></div></ytd-comment-thread-renderer>
+    <ytd-comment-thread-renderer data-cid="M2"><div class="row"><div class="av"></div><div class="body">
+      <a id="author-text" href="/@army4ever">@army4ever</a><span id="published-time-text">4 minutes ago</span>
+      <yt-attributed-string id="content-text">오빠 정국 사랑해 영원히 응원할게 보라해 아미</yt-attributed-string>
+      <span id="vote-count-middle">6</span></div></div></ytd-comment-thread-renderer>
+    <ytd-comment-thread-renderer data-cid="M3"><div class="row"><div class="av"></div><div class="body">
+      <a id="author-text" href="/@purplelove7">@purplelove7</a><span id="published-time-text">4 minutes ago</span>
+      <yt-attributed-string id="content-text">오빠 정국 사랑해 영원히 응원할게 보라해 아미</yt-attributed-string>
+      <span id="vote-count-middle">4</span></div></div></ytd-comment-thread-renderer>
+
+  </div></div>
+  <script type="module">
+    import { runScan } from './demo-bundle.js'
+    const s = runScan(document, 'no-api')
+    const el = document.createElement('div')
+    el.style.cssText = 'margin-top:16px;color:#8b97b3;font-size:12px'
+    el.textContent = `scanned ${s.totalComments} comments · ${s.flagged} flagged · ${s.suppressed} suppressed (organic) · ${s.badges} badges`
+    document.body.appendChild(el)
+  </script>
+</body>
+</html>
