@@ -4,18 +4,13 @@
 by a 90-minute hands-off autonomous run.
 
 ## 1. GitHub URL
-**https://github.com/jml226/coordcard-harness** (decided: overwrite the existing repo).
+**https://github.com/jml226/coordcard-harness**
 
-**Status: PENDING push** — `gh` is not authenticated in this unattended run, so the
-force-push could not run automatically. The `origin` remote and `main` branch are already
-configured; the operator runs ONE line to publish (local commits contain the finished work):
-
-```bash
-gh auth login && git -C ~/Desktop/ralphton2 push -f origin main
-```
+**Status: PUBLISHED** — the CoordCard extension is force-pushed to this repo (the prior
+harness-plugin contents were intentionally overwritten). Remote `main` HEAD matches local.
 
 ## 2. Demo
-- `docs/demo.png` — popup screenshot (Chrome headless render of the built UI).
+- `docs/demo.png` — real red-card demo: the actual scrape→cluster→score→injectBadges pipeline run over the live `watch?v=Nhec7NEP2os` DOM with a synthetic coordinated cluster injected; 5 flagged comments rendered with the honest label at 80% (Chrome headless render). The injected cluster is clearly demo data — the video's organic comments scored 0 flagged.
 - `docs/overview.html` — self-contained project + harness overview (dark theme, real build numbers).
 
 ## 3. README
