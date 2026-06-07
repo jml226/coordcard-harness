@@ -1,6 +1,6 @@
-slice: DONE (V0-V7 shipped)
-last_action: §10.A gate ALL PASS -> wrote DONE sentinel
-last_l1: GREEN 13 specs / 84 assertions
-last_l2: attempted; live gap found+fixed; deterministic snapshot green; live runs non-deterministic
-last_codex: not run (optional)
-cycle: 6
+slice: DONE (waves A-E complete)
+last_action: final §10.A re-gate ALL PASS; SHIP/DONE updated
+last_l1: GREEN 15 specs / 93 assertions
+last_l2: live gap found+fixed; deterministic snapshot green; live runs non-deterministic
+last_codex: not run
+cycle: 9

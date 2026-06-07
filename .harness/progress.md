@@ -8,3 +8,4 @@
 - cycle 6: §10.A GATE ALL PASS at 2130s. Wrote .harness/DONE (SHIPPED).
 - WAVE D: FIXED critical V7 bug — injectBadges looked up nodes by [data-cid] so LIVE comments (live-N ids, no data-cid) got 0 badges despite flagged detection. Refactored scraper.scrapeEntries (id+node), inject resolves via same id scheme. Test-first (RED->GREEN): tests/inject-live.spec.ts. Now 14 specs / 87 pass.
 - WAVE A: submission URL set to github.com/jml226/coordcard-harness; origin+main configured; push PENDING (gh not authed) -> 1-line operator cmd in SUBMISSION.md. WAVE C: overview.html expanded with 4 caught-bugs table + updated stats (15 specs/93). WAVE D edge: empty/all-short/paraphrase/mixed/300-perf/empty-scrape specs added. 15 specs / 93 pass.
+- cycle 9: WAVE E §10.A re-gate ALL PASS at 3997s. 15 specs/93. DONE updated (SHIPPED). Push PENDING (no auth).
