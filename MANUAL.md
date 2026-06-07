@@ -22,6 +22,13 @@ Step 7 is the non-negotiable demo. A clean popup preview is in `docs/demo.png`.
 - **Inject** red-card badges on flagged-cluster comments (idempotent).
 - **Honest label only**; clusters scored, never individuals.
 
+## Troubleshooting — "Could not establish connection / Receiving end does not exist"
+This meant the content script wasn't yet loaded in the tab (the tab was open before
+the extension loaded, or you reached `/watch` via in-app navigation). **Fixed:** the popup
+now injects the content script on demand (`chrome.scripting`) and retries automatically.
+After pulling a new build, click **Reload** on the CoordCard card in `chrome://extensions`
+once so Chrome picks up the rebuilt `dist/`, then Scan works on any open watch tab.
+
 ## Suggested demo URLs
 Any politically/commercially active video with a busy comment section works. The detector is
 deterministic on the offline §5.1 fixture (the test oracle); live results vary by video.

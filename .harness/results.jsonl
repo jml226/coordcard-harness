@@ -8,3 +8,4 @@
 {"ts":1780815125,"layer":"L1","exit_code":0,"duration_ms":849,"suite":"WAVE D inject-live fix; 14 specs 87 assertions","asserted":true}
 {"ts":1780815387,"layer":"GATE","exit_code":0,"duration_ms":0,"suite":"§10.A re-verify (waves A-E)","asserted":true,"note":"ALL PASS -> SHIPPED; V7 live-badge fixed; working demo"}
 {"ts":1780815525,"layer":"L2","exit_code":0,"duration_ms":0,"suite":"live-attempt#4 (Nhec7NEP2os, post-fix)","asserted":true,"note":"0 renderers (headless lazy-load variance); pipeline no-throw. Fix proven deterministically via inject-live.spec + real-browser demo.png"}
+{"ts":1780816721,"layer":"L1","exit_code":0,"duration_ms":0,"suite":"popup-scan inject-fallback fix; 16 specs 95 assertions","asserted":true,"note":"fixed live Receiving-end-does-not-exist: popup injects content script on demand + content guard"}

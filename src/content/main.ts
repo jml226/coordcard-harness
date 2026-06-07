@@ -3,7 +3,22 @@
 import { runScan, type ScanSummary } from '../scan'
 import { BADGE_CLASS } from '../inject'
 
-console.info('[CoordCard] content script loaded on', location.href)
+declare global {
+  interface Window {
+    __coordcardReady?: boolean
+  }
+}
+
+// Guard: the popup may re-inject this script on demand (chrome.scripting) when a
+// pre-existing/SPA tab had no listener. Register the listener at most once so
+// re-injection never produces duplicate responders.
+if (!window.__coordcardReady) {
+  window.__coordcardReady = true
+  installCoordCard()
+}
+
+function installCoordCard(): void {
+  console.info('[CoordCard] content script loaded on', location.href)
 
 const STYLE_ID = 'coordcard-style'
 
@@ -18,16 +33,17 @@ function ensureStyle(): void {
   document.documentElement.appendChild(style)
 }
 
-chrome.runtime.onMessage.addListener(
-  (msg: { type?: string; mode?: 'no-api' | 'api' }, _sender, sendResponse: (r: unknown) => void) => {
-    if (msg?.type !== 'coordcard-scan') return undefined
-    try {
-      ensureStyle()
-      const summary: ScanSummary = runScan(document, msg.mode ?? 'no-api')
-      sendResponse({ ok: true, summary })
-    } catch (e) {
-      sendResponse({ ok: false, error: String(e) })
-    }
-    return true
-  },
-)
+  chrome.runtime.onMessage.addListener(
+    (msg: { type?: string; mode?: 'no-api' | 'api' }, _sender, sendResponse: (r: unknown) => void) => {
+      if (msg?.type !== 'coordcard-scan') return undefined
+      try {
+        ensureStyle()
+        const summary: ScanSummary = runScan(document, msg.mode ?? 'no-api')
+        sendResponse({ ok: true, summary })
+      } catch (e) {
+        sendResponse({ ok: false, error: String(e) })
+      }
+      return true
+    },
+  )
+}

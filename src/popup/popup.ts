@@ -1,5 +1,7 @@
 // Popup controller. Sends a scan message to the active YouTube tab's content
 // script and renders an honest summary of detected clusters.
+import { requestScan } from './scan-request'
+
 interface ScanDetail {
   size: number
   S: number
@@ -55,12 +57,14 @@ btn.addEventListener('click', async () => {
       out.textContent = 'Open a YouTube watch page, then click Scan.'
       return
     }
-    const resp = (await chrome.tabs.sendMessage(tab.id, { type: 'coordcard-scan', mode: 'no-api' })) as
+    // requestScan injects the content script on demand if it isn't loaded yet
+    // (pre-existing tab or SPA navigation), then retries.
+    const resp = (await requestScan(chrome as never, tab.id, 'no-api')) as
       | { ok: true; summary: ScanSummary }
       | { ok: false; error: string }
       | undefined
     if (!resp) {
-      out.textContent = 'Could not reach the page. Reload the YouTube tab and retry.'
+      out.textContent = 'No response from the page. Reload the YouTube tab and retry.'
       return
     }
     if (!resp.ok) {
@@ -69,6 +73,9 @@ btn.addEventListener('click', async () => {
     }
     render(resp.summary)
   } catch (e) {
-    out.textContent = 'Could not reach the page (reload the tab): ' + String(e)
+    out.textContent =
+      'Could not reach the page. Reload the YouTube tab (and make sure comments are visible), then Scan again. [' +
+      String(e) +
+      ']'
   }
 })
