@@ -78,8 +78,8 @@
 
     <h3>Build result (§10.A gate)</h3>
     <div class="grid">
-      <div class="stat"><b>13</b><span>Vitest spec files green</span></div>
-      <div class="stat"><b>84</b><span>assertions passing</span></div>
+      <div class="stat"><b>14</b><span>Vitest spec files green</span></div>
+      <div class="stat"><b>87</b><span>assertions passing</span></div>
       <div class="stat"><b>MV3</b><span>dist/manifest.json valid</span></div>
       <div class="stat"><b>8/8</b><span>ship-gate checks</span></div>
     </div>
@@ -102,6 +102,16 @@
     </ul>
     <h3>The spine</h3>
     <p class="flow">V0 scaffold → V2 scraper → V3 char-4gram cluster → V4 time/burst → V5 reply-ring + suppressor → V6 mode-split score + flag → V7 red-card injector</p>
+
+    <h3>Bugs the discipline caught (real, this run)</h3>
+    <table>
+      <tr><th>#</th><th>Symptom</th><th>Root cause</th><th>Fix</th></tr>
+      <tr><td>1</td><td>Spurious "T+85 freeze" at startup</td><td>scope governor read <span class="mono">now − start_ts</span> with no clock set (missing file ≈ 1970)</td><td>bootstrap writes <span class="mono">start_ts</span>; freeze resolved</td></tr>
+      <tr><td>2</td><td>Suppressor missed <span class="mono">ㅋㅋㅋ</span> laughter floods</td><td>NFKC rewrites compatibility jamo U+314B → U+110F, so the literal regex never matched</td><td>normalize lexicon + flood input through the same pipeline</td></tr>
+      <tr><td>3</td><td>0 comments parsed on live YouTube</td><td>live renderers expose NO <span class="mono">data-cid</span> (140–160 present, 0 with it) — a fixture assumption</td><td>live-DOM fallback keyed on <span class="mono">ytd-comment-view-model</span> (L1 untouched)</td></tr>
+      <tr><td>4</td><td>0 red badges on live YouTube despite a flag</td><td>injector looked up nodes by <span class="mono">[data-cid]</span>, but live ids are <span class="mono">live-N</span> with no such attribute</td><td>inject resolves nodes via the scraper's own id→node map (<span class="mono">scrapeEntries</span>)</td></tr>
+    </table>
+    <p class="muted">Bugs 1–2 surfaced from L1 + hook discipline; bugs 3–4 surfaced ONLY because L2 ran the real-DOM smoke against live YouTube — the exact "fixture passes, live drifts" class that fixtures alone cannot catch.</p>
   </section>
 
   <p class="muted" style="text-align:center">Generated during the autonomous run · see <code>coordcard-PRD.md</code> for the full binding spec.</p>

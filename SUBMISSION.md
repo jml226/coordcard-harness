@@ -4,15 +4,15 @@
 by a 90-minute hands-off autonomous run.
 
 ## 1. GitHub URL
-**PENDING — `gh` is not authenticated** (an unattended run cannot authenticate). The operator
-runs this one line to publish:
+**https://github.com/jml226/coordcard-harness** (decided: overwrite the existing repo).
+
+**Status: PENDING push** — `gh` is not authenticated in this unattended run, so the
+force-push could not run automatically. The `origin` remote and `main` branch are already
+configured; the operator runs ONE line to publish (local commits contain the finished work):
 
 ```bash
-gh auth login && \
-gh repo create coordcard-ralphthon --public --source=. --push
+gh auth login && git -C ~/Desktop/ralphton2 push -f origin main
 ```
-
-A local commit already exists, so the push above publishes the finished work as-is.
 
 ## 2. Demo
 - `docs/demo.png` — popup screenshot (Chrome headless render of the built UI).
