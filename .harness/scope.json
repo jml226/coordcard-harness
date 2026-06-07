@@ -1,1 +1,7 @@
-{ "cuts": [], "frozen_to": null }
+{
+  "cuts": [
+    "V10",
+    "V11"
+  ],
+  "frozen_to": null
+}

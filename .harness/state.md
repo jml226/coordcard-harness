@@ -1,6 +1,6 @@
-slice: V7-done (logic+inject+tests green)
-last_action: full L1 green 13 specs
-last_l1: GREEN 83/84 (1 L2 skip)
-last_l2: pending attempt
-last_codex: none
-cycle: 3
+slice: DONE (V0-V7 shipped)
+last_action: §10.A gate ALL PASS -> wrote DONE sentinel
+last_l1: GREEN 13 specs / 84 assertions
+last_l2: attempted; live gap found+fixed; deterministic snapshot green; live runs non-deterministic
+last_codex: not run (optional)
+cycle: 6

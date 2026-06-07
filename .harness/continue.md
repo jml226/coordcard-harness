@@ -1,1 +1,1 @@
-Begin V0: scaffold the CoordCard work repo per coordcard-PRD.md and make `pnpm build` exit 0.
+SHIPPED. §10.A passed. Extension loadable from dist/. Submission: README.md, docs/demo.png, docs/overview.html, MANUAL.md, SUBMISSION.md, SHIP.md, local git commit. GitHub URL PENDING (gh not authed) — see SUBMISSION.md for the one-line publish command.

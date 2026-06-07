@@ -27,7 +27,7 @@ A local commit already exists, so the push above publishes the finished work as-
 ## 5. Build / ship status (§10.A gate)
 All eight shell-verifiable checks pass — **SHIPPED**:
 
-1. ✅ `pnpm test` exit 0 — **13 spec files**, 83 assertions green.
+1. ✅ `pnpm test` exit 0 — **13 spec files**, 84 assertions green (1 skipped: browser-import L2 variant).
 2. ✅ `pnpm build` exit 0 — `dist/manifest.json` is MV3.
 3. ✅ Manifest static checks — `*://*.youtube.com/watch*` match + exact `{storage, activeTab, scripting, clipboardWrite}` + host permission.
 4. ✅ L1 synthetic-fixture pipeline — X=0.80 FLAGGED, Z=0.68 NOT, M=0.80 SUPPRESSED (exact oracle).

@@ -1,0 +1,2 @@
+SHIPPED 2026-06-07T06:25:20Z
+§10.A items 1-8 all PASS via shell predicate. 13 specs/84 assertions green. L1 oracle exact (X0.80 FLAG / Z0.68 NOT / M0.80 SUPPRESSED). L2 attempted: surfaced live data-cid gap, fixed with fallback, deterministic snapshot proof green. Spine V0->V7 complete.

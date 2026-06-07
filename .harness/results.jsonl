@@ -1,2 +1,7 @@
 {"ts":1780811641,"layer":"V0","exit_code":0,"duration_ms":0,"suite":"build+validate-ship","asserted":true}
 {"ts":1780812311,"layer":"L1","exit_code":0,"duration_ms":699,"suite":"vitest 13 specs / 83 assertions","asserted":true}
+{"ts":1780812933,"layer":"submission","exit_code":0,"duration_ms":0,"suite":"readme+demo.png+overview+manual+submission+commit(nested repo)","asserted":true}
+{"ts":1780813407,"layer":"L2","exit_code":0,"duration_ms":0,"suite":"live-attempt#1","asserted":true,"note":"140 live ytd-comment-thread-renderer, 0 data-cid -> surfaced fixture-vs-live gap; pipeline did not throw"}
+{"ts":1780813407,"layer":"L2","exit_code":0,"duration_ms":0,"suite":"l2-snapshot-spec","asserted":true,"note":"deterministic: live-DOM fallback parsed >=20 real comments (non-null channelId+text) from captured 160-thread snapshot; cluster+score ran"}
+{"ts":1780813468,"layer":"L2","exit_code":0,"duration_ms":0,"suite":"live-attempt#2/#3","asserted":true,"note":"0 renderers (headless lazy-load/consent variance) -> non-deterministic as PRD warns; deterministic snapshot proof stands"}
+{"ts":1780813520,"layer":"GATE","exit_code":0,"duration_ms":0,"suite":"§10.A items 1-8","asserted":true,"note":"ALL PASS -> SHIPPED"}

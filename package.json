@@ -13,6 +13,7 @@
     "@crxjs/vite-plugin": "2.4.0",
     "@types/chrome": "0.0.313",
     "jsdom": "25",
+    "playwright-core": "^1.60.0",
     "typescript": "5.7.2",
     "vite": "6.2.0",
     "vitest": "4.1.0"
